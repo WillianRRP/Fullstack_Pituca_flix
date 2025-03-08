@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import { Link } from "react-router-dom";
+
+import './home.css'
 
 //url da api:/movie/now_playing?api_key=09cb032a5dc82af31448350df5b23055&language=pt-br
 
@@ -16,14 +19,25 @@ function Home(){
                     page: 1,
                 }
             })  
-            console.log(response.data);
+            console.log(response.data.results.slice(0, 10));
+            setFilmes(response.data.results.slice(0, 10))
         }
         loadFilmes();
 
     }, [])
     return(
-        <div>
-            <h1>Bem vindo</h1>
+        <div className="container">
+            <div className="lista-filmes">
+                {filmes.map((filme) =>{
+                    return(
+                        <article key={filme.id}>
+                            <strong>{filme.title}</strong>
+                            <img src={`https://image.tmdb.org/t/p/original/${filme.poster_path}`} alt={filme.title}/>
+                            <Link to={`/filme/${filme.id}`}>Acessar</Link>
+                        </article>
+                    )
+                })}
+            </div>
         </div>
     )
 }
