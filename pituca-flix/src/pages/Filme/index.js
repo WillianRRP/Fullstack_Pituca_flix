@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import './filme-info.css'
 import api from "../../services/api";
+import { toast } from "react-toastify";
 
 
 function Filme(){
@@ -45,13 +46,13 @@ function Filme(){
        const hasFilme = filmesSalvos.some( (filmesSalvos) => filmesSalvos.id === filme.id)
 
        if(hasFilme){
-        alert("Este filme já esta na lista")
+        toast.warn("Este filme já esta na lista")
         return;
        }
 
        filmesSalvos.push(filme)
        localStorage.setItem("@PitucaFlix", JSON.stringify(filmesSalvos))
-       alert("Filme Salvo")
+       toast.success("Filme Salvo")
     }
 
     if(Loading){
