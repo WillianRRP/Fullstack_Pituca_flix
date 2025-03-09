@@ -53,8 +53,6 @@ function Filme(){
        localStorage.setItem("@PitucaFlix", JSON.stringify(filmesSalvos))
        alert("Filme Salvo")
     }
-    
-
 
     if(Loading){
         return(
